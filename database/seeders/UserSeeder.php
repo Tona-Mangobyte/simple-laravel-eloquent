@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // User::truncate();
         User::factory(1000)->create();
         User::factory()->create([
              'name' => 'Tona@dev',
