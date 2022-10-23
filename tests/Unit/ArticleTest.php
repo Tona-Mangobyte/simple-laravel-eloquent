@@ -12,7 +12,19 @@ class ArticleTest extends \Tests\TestCase
 
     public function testReadRecordByIdTest() {
         $article = Article::where('id', 501)->first();
+        $article1 = Article::firstWhere('id', 501);
+        $findOne = Article::find(501);
+
         $this->assertEquals(501, $article->id);
+        $this->assertEquals(501, $article1->id);
+        $this->assertEquals(501, $findOne->id);
+    }
+
+    public function testReadRecordByIdsTest() {
+        $articles = Article::findMany([501, 502]);
+
+        $this->assertEquals(501, $articles[0]->id);
+        $this->assertEquals(502, $articles[1]->id);
     }
 
     public function testCreateRecordTest() {
