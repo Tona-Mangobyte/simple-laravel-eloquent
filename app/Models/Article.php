@@ -12,7 +12,7 @@ class Article extends Model
 {
     use HasFactory, Notifiable;
 
-    protected $fillable = ['user_id', 'title', 'content'];
+    protected $fillable = ['title', 'content'];
 
     protected $casts = [
         'user_id' => 'integer'
