@@ -17,6 +17,8 @@ class StaffTest extends \Tests\TestCase
         $staff->gender = Gender::MALE;
         $staff->address_line_one = "PP";
         $staff->address_line_two = "PV";
+        // $staff->address->lineOne = "PP";
+        // $staff->address->lineTwo = "PV";
         $success = $staff->save();
         $this->assertTrue($success);
     }
