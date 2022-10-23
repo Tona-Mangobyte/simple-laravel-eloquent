@@ -9,7 +9,9 @@ class ArticleQueryTest extends \Tests\TestCase
 {
     public function testQueryAllTest() {
         $articles = Article::all();
+        $articlesRelations = Article::with('author')->get();
         $this->assertCount(500, $articles);
+        $this->assertCount(500, $articlesRelations);
     }
 
     public function testFindManyTest() {
@@ -22,10 +24,12 @@ class ArticleQueryTest extends \Tests\TestCase
 
     public function testFindOneTest() {
         $article = Article::find(501);
+        $articleOrFail = Article::findOrFail(501);
         $articleOrNew = Article::findOrNew(503);
         $articleKey = Article::whereKey(502)->first();
 
         $this->assertEquals(501, $article->id);
+        $this->assertEquals(501, $articleOrFail->id);
         $this->assertEquals(503, $articleOrNew->id);
         $this->assertEquals(502, $articleKey->id);
     }
