@@ -14,14 +14,16 @@ class ArticleSaved
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $article;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($article)
     {
-        //
+        $this->article = $article;
     }
 
     /**

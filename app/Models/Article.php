@@ -18,19 +18,19 @@ class Article extends Model
         'user_id' => 'integer'
     ];
 
-    /*protected $dispatchesEvents = [
+    protected $dispatchesEvents = [
         'saved' => ArticleSaved::class,
-    ];*/
+    ];
 
     /**
      * The "booted" method of the model.
      *
      * @return void
      */
-    /*protected static function booted()
+    protected static function booted()
     {
         static::created(function ($article) {
-            Log::info("article create is success ". $article->id);
+            Log::info("logging in model article create is success ". $article->id);
         });
-    }*/
+    }
 }

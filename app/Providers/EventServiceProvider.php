@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleSaved;
+use App\Listeners\ArticleSavedNotification;
 use App\Models\Article;
 use App\Observers\ArticleObserver;
 use Illuminate\Auth\Events\Registered;
@@ -19,6 +21,10 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+
+        ArticleSaved::class => [
+            ArticleSavedNotification::class
         ],
     ];
 
