@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Database\Eloquent\Castable;
+use App\Casts\Address as AddressCast;
+use App\ValueObjects\Address as AddressValueObject;
+use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 
 class Address implements Castable
 {
@@ -14,11 +17,12 @@ class Address implements Castable
      */
     public static function castUsing(array $arguments)
     {
+        // return AddressCast::class;
         return new class implements CastsAttributes
         {
             public function get($model, $key, $value, $attributes)
             {
-                return new Address(
+                return new AddressValueObject(
                     $attributes['address_line_one'],
                     $attributes['address_line_two']
                 );
