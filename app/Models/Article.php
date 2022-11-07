@@ -15,6 +15,15 @@ class Article extends Model
 
     protected $fillable = ['title', 'content'];
 
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'published' => 0,
+    ];
+
     protected $casts = [
         'user_id' => 'integer'
     ];
@@ -38,5 +47,16 @@ class Article extends Model
         static::created(function ($article) {
             Log::info("logging in model article create is success ". $article->id);
         });
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
+    }
+
+    public function publishedArticle() {
+        $this->attributes = [
+            'published' => 1,
+        ];
     }
 }

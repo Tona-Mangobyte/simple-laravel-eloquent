@@ -20,6 +20,15 @@ class Staff extends Model
         'address_line_two',
     ];
 
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'first_name' => "Tona",
+    ];
+
     protected $casts = [
         'gender' => Gender::class,
         // 'address' => Address::class, // ============ CASTING 2-WAY=================
