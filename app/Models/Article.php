@@ -49,9 +49,9 @@ class Article extends Model
         });
     }
 
-    public function scopePublished($query)
+    public function scopePublished($query, $arg = 1)
     {
-        return $query->where('published', 1);
+        return $query->where('published', $arg);
     }
 
     public function publishedArticle() {
