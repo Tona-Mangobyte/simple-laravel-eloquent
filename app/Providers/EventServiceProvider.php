@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\ArticleNotify;
 use App\Events\ArticleSaved;
+use App\Listeners\ArticleNotifyListeners;
 use App\Listeners\ArticleSavedNotification;
 use App\Models\Article;
 use App\Observers\ArticleObserver;
@@ -26,6 +28,10 @@ class EventServiceProvider extends ServiceProvider
         ArticleSaved::class => [
             ArticleSavedNotification::class
         ],
+
+        ArticleNotify::class => [
+            ArticleNotifyListeners::class
+        ]
     ];
 
     /**

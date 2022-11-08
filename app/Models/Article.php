@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\Events\ArticleNotify;
 use App\Events\ArticleSaved;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
 
@@ -33,8 +38,13 @@ class Article extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function comments(): HasMany {
+        return $this->hasMany(Comment::class);
+    }
+
     protected $dispatchesEvents = [
         'saved' => ArticleSaved::class,
+        'notify' => ArticleNotify::class,
     ];
 
     /**
@@ -58,5 +68,23 @@ class Article extends Model
         $this->attributes = [
             'published' => 1,
         ];
+    }
+
+    /**
+     * Register a notify model event with the dispatcher.
+     *
+     * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+     * @return void
+     */
+    /*public static function notify($callback)
+    {
+        static::registerModelEvent('notify', $callback);
+    }*/
+
+    public function save(array $options = [])
+    {
+        $save =  parent::save($options);
+        $this->fireModelEvent('notify');
+        return $save;
     }
 }
