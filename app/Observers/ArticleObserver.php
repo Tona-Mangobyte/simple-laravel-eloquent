@@ -61,4 +61,9 @@ class ArticleObserver
     {
         Log::info("article forceDeleted is success ". $article->id);
     }
+
+    public function notify(Article $article)
+    {
+        Log::info("article notified is success ". $article->id);
+    }
 }

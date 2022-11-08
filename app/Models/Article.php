@@ -71,15 +71,21 @@ class Article extends Model
     }
 
     /**
-     * Register a notify model event with the dispatcher.
+     * Get the observable event names.
      *
-     * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
-     * @return void
+     * @return array
      */
-    /*public static function notify($callback)
+    public function getObservableEvents()
     {
-        static::registerModelEvent('notify', $callback);
-    }*/
+        return array_merge(
+            [
+                'retrieved', 'creating', 'created', 'updating', 'updated',
+                'saving', 'saved', 'restoring', 'restored', 'replicating',
+                'deleting', 'deleted', 'forceDeleted', 'notify',
+            ],
+            $this->observables
+        );
+    }
 
     public function save(array $options = [])
     {
